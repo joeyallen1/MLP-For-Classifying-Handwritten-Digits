@@ -33,6 +33,19 @@ class Linear(Module):
         self.W = self.W - lrate * self.dLdW
         self.W0 = self.W0 - lrate * self.dLdW0
     
+# represents ReLu (Rectified Linear Unit) activation function
+class ReLu(Module):
+
+    # returns activation A given pre-activation Z
+    def forward(self, Z):
+        self.A = np.maximum(0, Z)
+        return self.A
+    
+    # returns dLdZ, the gradient of the loss with resepct to 
+    # the pre-activation
+    def backward(self, dLdA):
+        dAdZ = self.A != 0  # 1 when A != 0 and 0 otherwise
+        return dLdA * dAdZ
     
 # represents negative log likelihood loss (for multiclass classification)
 class NLL(Module):
