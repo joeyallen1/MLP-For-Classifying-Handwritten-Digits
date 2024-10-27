@@ -9,16 +9,17 @@ class Sequential:
         self.modules = modules
         self.loss = loss
 
+    # stochastic gradient descent
     def sgd(self, X, Y, iterations=100, lrate=0.005):
         num_points = X.shape[1]
         for iter in range(iterations):
-            i = np.random.randint(0, num_points)
-            Xt = X[:, i:i+1]
+            i = np.random.randint(0, num_points) #choose random point and target value
+            Xt = X[:, i:i+1]      
             Yt = Y[:, i:i+1]
-            Ypred = self.forward(Xt)
-            loss = self.loss.forward(Ypred, Yt)
-            self.backward(self.loss.backward())
-            self.sgd_step(lrate)
+            Ypred = self.forward(Xt)    #compute forward pass
+            loss = self.loss.forward(Ypred, Yt)   # compute loss 
+            self.backward(self.loss.backward())  # error back-propagation
+            self.sgd_step(lrate)    # gradient update step
     
     # does a forward pass through the network and 
     # returns final prediction
