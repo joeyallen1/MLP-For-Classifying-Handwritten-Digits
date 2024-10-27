@@ -24,7 +24,7 @@ class Sequential:
         for iter in range(iterations):
             i = np.random.randint(0, num_points) #choose random point and target value
             Xt = self.X_train[:, i:i+1]      
-            Yt = self.Y_train[:, i:i+1]
+            Yt = self.Y_train[i]
             Ypred = self.forward(Xt)    #compute forward pass
             loss = self.loss.forward(Ypred, Yt)   # compute loss 
             self.backward(self.loss.backward())  # error back-propagation
@@ -43,7 +43,7 @@ class Sequential:
         num_correct = 0
         for i in range(num_testing_points):      # go through all data in testing set
             Xt = self.X_test[:, i:i+1]
-            Yt = self.Y_test[:, i:i+1]
+            Yt = self.Y_test[i]
             Ypred = self.forward(Xt)      
             Ypred_class = self.loss.classify(Ypred)       # find classification of prediction
             if Ypred_class == Yt:
