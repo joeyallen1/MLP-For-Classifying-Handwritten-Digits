@@ -1,5 +1,6 @@
 import numpy as np
 
+# represents a module in the neural network implementation
 class Module:
 
     # only the linear modules need to compute a step
@@ -50,7 +51,7 @@ class ReLu(Module):
         return dLdA * dAdZ
     
 
-    
+
 # represents a SoftMax activation function
 class SoftMax(Module):
 
