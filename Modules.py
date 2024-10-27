@@ -33,6 +33,8 @@ class Linear(Module):
         self.W = self.W - lrate * self.dLdW
         self.W0 = self.W0 - lrate * self.dLdW0
     
+
+
 # represents ReLu (Rectified Linear Unit) activation function
 class ReLu(Module):
 
@@ -47,6 +49,27 @@ class ReLu(Module):
         dAdZ = self.A != 0  # 1 when A != 0 and 0 otherwise
         return dLdA * dAdZ
     
+# represents a SoftMax activation function
+class SoftMax(Module):
+
+    # returns the activation for softmax
+    def forward(self, Z):
+        sum = np.sum(np.exp(Z))
+        return np.exp(Z) / sum
+    
+    # returns dLdZ (just returns input because
+    # dLdZ will be calculated directly in loss module)
+    def backward(self, dLdZ):
+        return dLdZ
+    
+    # returns the final classification prediction
+    # given the prediction vector
+    def classify(self, Ypred):
+        return np.argmax(Ypred)
+
+
+
+
 # represents negative log likelihood loss (for multiclass classification)
 class NLL(Module):
     
