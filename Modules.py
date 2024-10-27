@@ -28,6 +28,11 @@ class Linear(Module):
         self.dLdW0 = dLdZ 
         return self.W@dLdZ
     
+    # gradient descent step, updates weights
+    def sgd_step(self, lrate):
+        self.W = self.W - lrate * self.dLdW
+        self.W0 = self.W0 - lrate * self.dLdW0
+    
     
 # represents negative log likelihood loss (for multiclass classification)
 class NLL(Module):
