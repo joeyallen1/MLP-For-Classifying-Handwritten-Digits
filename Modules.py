@@ -49,6 +49,8 @@ class ReLu(Module):
         dAdZ = self.A != 0  # 1 when A != 0 and 0 otherwise
         return dLdA * dAdZ
     
+
+    
 # represents a SoftMax activation function
 class SoftMax(Module):
 
