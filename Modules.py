@@ -25,7 +25,7 @@ class Linear(Module):
     # stores dLdW and dLdW0 for later use in weight updates
     # returns dLdA (where A is activation from previous layer)
     def backward(self, dLdZ):
-        self.dLdW = self.A@dLdZ  
+        self.dLdW = self.A@dLdZ.T
         self.dLdW0 = dLdZ 
         return self.W@dLdZ
     
