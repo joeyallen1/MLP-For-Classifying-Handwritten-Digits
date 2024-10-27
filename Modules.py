@@ -20,7 +20,7 @@ class Linear(Module):
     # returns pre-activation
     def forward(self, A):
         self.A = A
-        return self.W.T@self.A + self.W0
+        return self.W.T@A + self.W0
     
     # stores dLdW and dLdW0 for later use in weight updates
     # returns dLdA (where A is activation from previous layer)
@@ -57,7 +57,7 @@ class SoftMax(Module):
 
     # returns the activation for softmax
     def forward(self, Z):
-        sum = np.sum(np.exp(Z))
+        sum = np.sum(np.exp(Z), axis=0)
         return np.exp(Z) / sum
     
     # returns dLdZ (just returns input because
@@ -80,7 +80,7 @@ class NLL(Module):
     def forward(self, Ypred, Y):
         self.Ypred = Ypred
         self.Y = Y
-        return float(np.sum(self.Y * np.log(self.Ypred))) * -1
+        return float(np.sum(-Y * np.log(Ypred)))
 
     # returns dLdZ (gradient of the loss with respect to preactivation)
     # note: the NLL module is always paired with SoftMax activation

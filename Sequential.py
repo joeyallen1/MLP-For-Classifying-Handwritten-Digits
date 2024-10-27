@@ -45,7 +45,7 @@ class Sequential:
             Xt = self.X_test[:, i:i+1]
             Yt = self.Y_test[i]
             Ypred = self.forward(Xt)      
-            Ypred_class = self.loss.classify(Ypred)       # find classification of prediction
+            Ypred_class = self.modules[-1].classify(Ypred)       # find classification of prediction
             if Ypred_class == Yt:
                 num_correct += 1
 
