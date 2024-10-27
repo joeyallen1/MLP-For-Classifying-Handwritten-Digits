@@ -1,5 +1,5 @@
 import numpy as np
-import Modules.py
+import Modules
 
 # represents the feed-forward neural network
 class Sequential:
@@ -9,10 +9,16 @@ class Sequential:
         self.modules = modules
         self.loss = loss
 
-    def sgd(X, Y, iterations=100, lrate=0.005):
+    def sgd(self, X, Y, iterations=100, lrate=0.005):
         num_points = X.shape[1]
-        i = np.random.randint(0, num_points)
-        Xt = 
+        for iter in range(iterations):
+            i = np.random.randint(0, num_points)
+            Xt = X[:, i:i+1]
+            Yt = Y[:, i:i+1]
+            Ypred = self.forward(Xt)
+            loss = self.loss.forward(Ypred, Yt)
+            self.backward(self.loss.backward())
+            self.sgd_step(lrate)
     
     # does a forward pass through the network and 
     # returns final prediction
