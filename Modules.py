@@ -13,8 +13,8 @@ class Linear(Module):
     def __init__(self, m, n):
         self.m = m
         self.n = n
-        self.W0 = np.random.normal(0.0, 1.0, (n, 1))  #add normally distributed noise to original weights
-        self.W = np.random.normal(0.0, m ** -1, (m, n)) 
+        self.W0 = np.zeros((n, 1))  
+        self.W = np.random.normal(0.0, float(m) ** -.5, (m, n)) #add normally distributed noise to original weights
 
     # stores the atctivation from previous layer
     # returns pre-activation
@@ -58,7 +58,7 @@ class SoftMax(Module):
     # returns the activation for softmax
     def forward(self, Z):
         sum = np.sum(np.exp(Z), axis=0)
-        return np.exp(Z) / sum
+        return np.exp(Z) / sum   #issue: sum is getting way too large in later iterations
     
     # returns dLdZ (just returns input because
     # dLdZ will be calculated directly in loss module)
@@ -68,7 +68,7 @@ class SoftMax(Module):
     # returns the final classification prediction
     # given the prediction vector
     def classify(self, Ypred):
-        return np.argmax(Ypred)
+        return np.argmax(Ypred, axis=0) 
 
 
 

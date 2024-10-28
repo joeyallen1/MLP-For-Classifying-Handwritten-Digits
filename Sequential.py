@@ -2,6 +2,13 @@ import numpy as np
 import copy
 import Modules
 
+# returns a one-hot encoding of Y with the given number of classes
+def one_hot_encode(Y, num_classes):
+    encoding = np.zeros((num_classes,1))
+    encoding[Y, 0] = 1
+    return encoding
+
+
 # represents the feed-forward neural network
 class Sequential:
 
@@ -18,13 +25,14 @@ class Sequential:
         self.Y_test = Y_test
 
     # stochastic gradient descent
-    def sgd(self, iterations=500, lrate=0.005, every=50):
+    def sgd(self, iterations=1000, lrate=0.01, every=50):
         num_points = self.X_train.shape[1]
         testing_accuracies = []
         for iter in range(iterations):
             i = np.random.randint(0, num_points) #choose random point and target value
             Xt = self.X_train[:, i:i+1]      
             Yt = self.Y_train[i]
+            Yt = one_hot_encode(Yt, 10)
             Ypred = self.forward(Xt)    #compute forward pass
             loss = self.loss.forward(Ypred, Yt)   # compute loss 
             self.backward(self.loss.backward())  # error back-propagation

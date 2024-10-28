@@ -21,7 +21,7 @@ print(x_test.shape)
 print(y_test.shape)
 
 
-modules = [Linear(784, 5), ReLu(), SoftMax()]
+modules = [Linear(784, 10), ReLu(), SoftMax()]
 loss = NLL()
 model = Sequential(modules, loss, x_train, x_test, y_train, y_test)
 
