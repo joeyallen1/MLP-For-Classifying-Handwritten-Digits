@@ -9,13 +9,14 @@ def one_hot_encode(Y, num_classes):
     return encoding
 
 
+
 # represents the feed-forward neural network
 class Sequential:
 
     # initialized with list of modules and loss module,
     # training and testing data, training and testing target values
     # X_train is m by n where m is dimension of data and n is number of data points
-    # Y_train is 1 by n where n is number of target values
+    # Y_train is n by 1 where n is number of target values
     def __init__(self, modules, loss, X_train, X_test, Y_train, Y_test):
         self.modules = modules
         self.loss = loss
@@ -25,13 +26,13 @@ class Sequential:
         self.Y_test = Y_test
 
     # stochastic gradient descent
-    def sgd(self, iterations=1000, lrate=0.01, every=50):
+    def sgd(self, iterations=100, lrate=0.01, every=50):
         num_points = self.X_train.shape[1]
         testing_accuracies = []
         for iter in range(iterations):
             i = np.random.randint(0, num_points) #choose random point and target value
             Xt = self.X_train[:, i:i+1]      
-            Yt = self.Y_train[i]
+            Yt = self.Y_train[i,0]
             Yt = one_hot_encode(Yt, 10)
             Ypred = self.forward(Xt)    #compute forward pass
             loss = self.loss.forward(Ypred, Yt)   # compute loss 
@@ -51,7 +52,7 @@ class Sequential:
         num_correct = 0
         for i in range(num_testing_points):      # go through all data in testing set
             Xt = self.X_test[:, i:i+1]
-            Yt = self.Y_test[i]
+            Yt = self.Y_test[i, 0]
             Ypred = self.forward(Xt)      
             Ypred_class = self.modules[-1].classify(Ypred)       # find classification of prediction
             if Ypred_class == Yt:

@@ -26,7 +26,7 @@ class Linear(Module):
     # returns dLdA (where A is activation from previous layer)
     def backward(self, dLdZ):
         self.dLdW = self.A@dLdZ.T
-        self.dLdW0 = dLdZ 
+        self.dLdW0 = dLdZ
         return self.W@dLdZ
     
     # gradient descent step, updates weights
@@ -68,7 +68,7 @@ class SoftMax(Module):
     # returns the final classification prediction
     # given the prediction vector
     def classify(self, Ypred):
-        return np.argmax(Ypred, axis=0) 
+        return float(np.argmax(Ypred, axis=0))
 
 
 
