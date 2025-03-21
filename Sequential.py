@@ -64,8 +64,9 @@ class Sequential:
         plt.show()
 
 
-    # evaluate the accuracy of the current model on the testing set
-    def eval_accuracy(self):
+    def eval_accuracy(self) -> float:
+        '''Evaluates the accuracy of the current model on the entire testing dataset.'''
+
         num_testing_points = self.X_test.shape[1]
         num_correct = 0
         for i in range(num_testing_points):      # go through all data in testing set
@@ -78,20 +79,24 @@ class Sequential:
 
         return num_correct / num_testing_points            # return accuracy
     
-    # does a forward pass through the network and 
-    # returns final prediction
-    def forward(self, Xt):
+
+    def forward(self, Xt) -> int:
+        '''Does a forward pass through the network and returns the final classification prediction.'''
+
         for m in self.modules:
             Xt = m.forward(Xt)
         return Xt
     
-    # error back-propagation
+    
     def backward(self, y):
+        '''Implements error back-propagation.'''
+
         for m in self.modules[::-1]:
             y = m.backward(y)
 
-    # does gradient descent update for each
-    # linear module in network
+
     def sgd_step(self, lrate):
+        '''Does a gradient descent update for each linear module in network'''
+
         for m in self.modules[::-1]:
             m.sgd_step(lrate)
