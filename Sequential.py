@@ -1,23 +1,25 @@
 import numpy as np
-import copy
-import Modules
+from Modules import Module
 
-# returns a one-hot encoding of Y with the given number of classes
-def one_hot_encode(Y, num_classes):
+
+def one_hot_encode(Y: int, num_classes: int):
+    '''Returns a one-hot encoding of Y as a vector with the given number of classes. '''
     encoding = np.zeros((num_classes,1))
     encoding[Y, 0] = 1
     return encoding
 
 
-
-# represents the feed-forward neural network
 class Sequential:
+    '''Represents a simple feed-foward neural network.'''
 
-    # initialized with list of modules and loss module,
-    # training and testing data, training and testing target values
-    # X_train is m by n where m is dimension of data and n is number of data points
-    # Y_train is n by 1 where n is number of target values
-    def __init__(self, modules, loss, X_train, X_test, Y_train, Y_test):
+    def __init__(self, modules: list[Module], loss: Module, X_train: np.array, X_test: np.array, 
+                 Y_train: np.array, Y_test: np.array):
+        '''Initializes the network with the given list of module and loss function, as well as 
+        training and testing data with target values.
+        
+        X_train and X_test are m by n where m is dimension of data and n is number of data points.
+        Y_train and Y_test are n by 1 where n is number of target values. '''
+
         self.modules = modules
         self.loss = loss
         self.X_train = X_train
@@ -25,12 +27,15 @@ class Sequential:
         self.Y_train = Y_train
         self.Y_test = Y_test
 
-    # stochastic gradient descent
-    def sgd(self, iterations=100, lrate=0.01, every=50):
+
+    def sgd(self, seed = 10, iterations=100, lrate=0.01, every=50):
+        '''An implementation of stochastic gradient descent.'''
+
         num_points = self.X_train.shape[1]
         testing_accuracies = []
+        random_generator = np.random.default_rng(seed)
         for iter in range(iterations):
-            i = np.random.randint(0, num_points) #choose random point and target value
+            i = random_generator.integers(0, num_points)  # choose random data point
             Xt = self.X_train[:, i:i+1]      
             Yt = self.Y_train[i,0]
             Yt = one_hot_encode(Yt, 10)

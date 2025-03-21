@@ -31,4 +31,4 @@ modules = [Linear(784, 28), ReLu(),
 loss = NLL()
 model = Sequential(modules, loss, x_train, x_test, y_train, y_test)
 
-model.sgd(iterations=500, lrate=0.05, every=10)
+model.sgd(iterations=7000, lrate=0.001, every=100)

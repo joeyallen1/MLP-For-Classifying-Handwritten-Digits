@@ -10,11 +10,12 @@ class Module:
 
 # represents the weights in a layer
 class Linear(Module):
-    def __init__(self, m, n):
+    def __init__(self, m, n, seed = 10):
         self.m = m
         self.n = n
         self.W0 = np.zeros((n, 1))  
-        self.W = np.random.normal(0.0, float(m) ** -.5, (m, n)) #add normally distributed noise to original weights
+        random_generator = np.random.default_rng(seed)
+        self.W = random_generator.normal(0.0, float(m) ** -.5, (m, n))   # add normally distributed noise to original weights
 
     # stores the atctivation from previous layer
     # returns pre-activation
