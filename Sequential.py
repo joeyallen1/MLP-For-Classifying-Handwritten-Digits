@@ -13,8 +13,8 @@ def one_hot_encode(Y: int, num_classes: int):
 class Sequential:
     '''Represents a simple feed-foward neural network.'''
 
-    def __init__(self, modules: list[Module], loss: Module, X_train: np.array, X_test: np.array, 
-                 Y_train: np.array, Y_test: np.array):
+    def __init__(self, modules: list[Module], loss: Module, X_train: np.ndarray, X_test: np.ndarray, 
+                 Y_train: np.ndarray, Y_test: np.ndarray):
         '''Initializes the network with the given list of module and loss function, as well as 
         training and testing data with target values.
         
@@ -80,22 +80,22 @@ class Sequential:
         return num_correct / num_testing_points            # return accuracy
     
 
-    def forward(self, Xt) -> int:
-        '''Does a forward pass through the network and returns the final classification prediction.'''
+    def forward(self, Xt) -> np.ndarray:
+        '''Does a forward pass through the network and returns the final classification prediction vector.'''
 
         for m in self.modules:
             Xt = m.forward(Xt)
         return Xt
     
     
-    def backward(self, y):
+    def backward(self, y: np.ndarray):
         '''Implements error back-propagation.'''
 
         for m in self.modules[::-1]:
             y = m.backward(y)
 
 
-    def sgd_step(self, lrate):
+    def sgd_step(self, lrate: float):
         '''Does a gradient descent update for each linear module in network'''
 
         for m in self.modules[::-1]:
