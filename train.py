@@ -2,12 +2,12 @@ from Sequential import *
 from Modules import *
 import pandas as pd
 
-train_df = pd.read_csv('mnist_train.csv')
+train_df = pd.read_csv('MNIST Data/mnist_train.csv')
 x_train = train_df.iloc[:, 1:].to_numpy()
 x_train = x_train.T
 y_train = train_df.iloc[:, 0].to_numpy()
 
-test_df = pd.read_csv('mnist_train.csv')
+test_df = pd.read_csv('MNIST Data/mnist_train.csv')
 x_test = test_df.iloc[:, 1:].to_numpy()
 x_test = x_test.T
 y_test = test_df.iloc[:, 0].to_numpy()
@@ -30,4 +30,4 @@ modules = [Linear(784, 28), ReLu(),
 loss = NLL()
 model = Sequential(modules, loss, x_train, x_test, y_train, y_test)
 
-model.sgd(iterations=7000, lrate=0.001, every=100)
+model.sgd(iterations=10000, lrate=0.001, every=100)
