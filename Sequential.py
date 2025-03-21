@@ -1,5 +1,6 @@
 import numpy as np
 from Modules import Module
+import matplotlib.pyplot as plt
 
 
 def one_hot_encode(Y: int, num_classes: int):
@@ -33,23 +34,35 @@ class Sequential:
 
         num_points = self.X_train.shape[1]
         testing_accuracies = []
+        step_numbers = []
         random_generator = np.random.default_rng(seed)
         for iter in range(iterations):
             i = random_generator.integers(0, num_points)  # choose random data point
             Xt = self.X_train[:, i:i+1]      
             Yt = self.Y_train[i,0]
             Yt = one_hot_encode(Yt, 10)
-            Ypred = self.forward(Xt)    #compute forward pass
-            loss = self.loss.forward(Ypred, Yt)   # compute loss 
+            Ypred = self.forward(Xt)    # compute forward pass
+            loss = self.loss.forward(Ypred, Yt)   # compute loss
             self.backward(self.loss.backward())  # error back-propagation
             self.sgd_step(lrate)    # gradient update step
 
-            # calculate accuracy on testing set for every given number of iterations
+            # calculate accuracy on entire testing set for every given number of iterations
             if iter % every == 0:
                 testing_accuracies.append(self.eval_accuracy())
+                step_numbers.append(iter)
         
-        # self.plot_accuracies()
-        print(testing_accuracies)
+        self.plot_accuracies(step_numbers, testing_accuracies)
+
+
+    def plot_accuracies(self, step_numbers: list[int], accuracies: list[float]):
+        '''Plots the model's accuracy on the testing set over the training period.'''
+
+        plt.plot(step_numbers, accuracies)
+        plt.xlabel("Training Step")
+        plt.ylabel("Testing Accuracy")
+        plt.title("Test Accuracy During Training")
+        plt.show()
+
 
     # evaluate the accuracy of the current model on the testing set
     def eval_accuracy(self):
