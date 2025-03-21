@@ -5,9 +5,11 @@ import matplotlib.pyplot as plt
 
 def one_hot_encode(Y: int, num_classes: int):
     '''Returns a one-hot encoding of Y as a vector with the given number of classes. '''
+
     encoding = np.zeros((num_classes,1))
     encoding[Y, 0] = 1
     return encoding
+
 
 
 class Sequential:
