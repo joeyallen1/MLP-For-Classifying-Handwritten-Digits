@@ -1,6 +1,6 @@
 # MLP-For-Classifying-Handwritten-Digits
 
-A neural network for classifying handwritten digits from the MNIST dataset, implemented from scratch using NumPy for matrix operations. The purpose of this
+A Multi-Layer Perceptron (MLP) for classifying handwritten digits from the MNIST dataset, implemented from scratch using NumPy for matrix operations. The purpose of this
 project is to understand the inner workings of neural networks and apply it to a real-world classification problem.
 
 This project was inspired by and contains portions of code from the *Introduction to Machine Learning* course on MIT OpenCourseWare.
