@@ -1,6 +1,5 @@
 from Sequential import *
 from Modules import *
-import csv
 import pandas as pd
 
 train_df = pd.read_csv('mnist_train.csv')
