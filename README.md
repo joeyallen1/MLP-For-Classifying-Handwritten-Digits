@@ -3,6 +3,10 @@
 A Multi-Layer Perceptron (MLP) for classifying handwritten digits from the MNIST dataset, implemented from scratch using NumPy for matrix operations. The purpose of this
 project is to understand the inner workings of neural networks and apply it to a real-world classification problem.
 
+![MNIST Data Visualization](./Images/MNIST_Image.png)  
+![Image Description](https://en.wikipedia.org/wiki/MNIST_database#/media/File:MNIST_dataset_example.png)
+[Cite](https://en.wikipedia.org/wiki/MNIST_database#/media/File:MNIST_dataset_example.png)
+
 This project was inspired by and contains portions of code from the *Introduction to Machine Learning* course on MIT OpenCourseWare.
 
 **MNIST Dataset (CSV format):** [Kaggle - MNIST in CSV](https://www.kaggle.com/datasets/oddrationale/mnist-in-csv/data)
@@ -40,6 +44,9 @@ To modify the number of training iterations, learning rate, or network architect
 - The first linear layer should have an input dimension of 784 since the MNIST images are 28x28 pixels.
 
 After training, a plot of accuracy over time will be displayed.
+
+![Training Curve](./Images/Training Curve.png) 
+A sample training curve
 
 ## Future Work
 - Implementing optimizers like Adam for improved convergence
