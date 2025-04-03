@@ -44,7 +44,7 @@ To modify the number of training iterations, learning rate, or network architect
 
 After training, a plot of accuracy over time will be displayed.
 
-![Training Curve]("./Images/Training Curve.png") 
+![Training_Curve]("./Images/Training Curve.png") 
 A sample training curve
 
 ## Future Work
