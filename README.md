@@ -44,8 +44,7 @@ To modify the number of training iterations, learning rate, or network architect
 
 After training, a plot of accuracy over time will be displayed.
 
-![Training_Curve](./Images/Training_Curve.png) 
-A sample training curve
+![Training_Curve](./Images/Training_Curve.png)
 
 ## Future Work
 - Implementing optimizers like Adam for improved convergence
